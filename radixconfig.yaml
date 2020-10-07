@@ -1,0 +1,27 @@
+apiVersion: radix.equinor.com/v1
+kind: RadixApplication
+metadata:
+  name: daft-webviz-plugin-test
+spec:
+  environments:
+    - name: dev
+      build:
+        from: master
+  components:
+    - name: main
+      src: "./portable"
+      ports:
+        - name: http
+          port: 5000
+      environmentConfig:
+        - environment: dev
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "100m"
+            limits:
+              memory: "1G"
+              cpu: "1000m"
+  dnsAppAlias:
+    environment: dev
+    component: main
