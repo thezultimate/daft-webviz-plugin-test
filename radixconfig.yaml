@@ -13,6 +13,7 @@ spec:
       ports:
         - name: http
           port: 5000
+      publicPort: http
       environmentConfig:
         - environment: dev
           resources:
