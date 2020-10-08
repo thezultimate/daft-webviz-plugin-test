@@ -20,8 +20,8 @@ spec:
               memory: "200Mi"
               cpu: "100m"
             limits:
-              memory: "1G"
-              cpu: "1000m"
+              memory: "400Mi"
+              cpu: "200m"
   dnsAppAlias:
     environment: dev
     component: main
