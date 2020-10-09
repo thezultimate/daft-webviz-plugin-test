@@ -21,7 +21,7 @@ class SomeOtherCustomPlugin(WebvizPluginABC):
             [
                 html.H1("This is a static title"),
                 html.Button(id=self.button_id, n_clicks=0, children="Submit"),
-                html.Div(id=self.div_id),
+                html.Div(id=self.div_id)
             ]
         )
 

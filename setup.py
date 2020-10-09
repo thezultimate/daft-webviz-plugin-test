@@ -16,10 +16,12 @@ setup(
         "webviz_config_plugins": [
             "SomeCustomPlugin = daft_webviz_plugin_test.plugins:SomeCustomPlugin",
             "SomeOtherCustomPlugin = daft_webviz_plugin_test.plugins:SomeOtherCustomPlugin",
+            "SomeRadixDaftPlugin = daft_webviz_plugin_test.plugins:SomeRadixDaftPlugin",
         ]
     },
     install_requires=[
         "webviz-config>=0.1.0",
+        "msal",
     ],
     tests_require=TESTS_REQUIRE,
     extras_require={"tests": TESTS_REQUIRE},
