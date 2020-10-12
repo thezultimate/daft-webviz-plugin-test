@@ -10,3 +10,7 @@ pages:
  - title: Some other page
    content:
     - SomeOtherCustomPlugin:
+
+ - title: Azure code flow test
+   content:
+    - SomeRadixDaftPlugin:

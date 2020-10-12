@@ -1,2 +1,3 @@
 from ._some_custom_plugin import SomeCustomPlugin
 from ._some_other_custom_plugin import SomeOtherCustomPlugin
+from ._some_radix_daft_plugin import SomeRadixDaftPlugin
