@@ -7,6 +7,8 @@ from webviz_config import WebvizPluginABC
 
 from ._auth import Auth
 
+from flask import request
+
 CLIENT_ID = "f9d8dfc9-9bd5-4df3-a53a-f09d211e1e97"
 RESOURCE_ID = "1025aa65-09e1-41a8-8c59-68ede2e41340"
 
@@ -33,7 +35,8 @@ class SomeRadixDaftPlugin(WebvizPluginABC):
                     html.H3("Authentication with Azure"),
                     html.Button("Authenticate", id=self.auth_button_id),
                     html.Div(id=self.auth_div_id),
-                    html.Div(id=self.message_div_id)
+                    html.Div(id=self.message_div_id),
+                    html.Div(id="test_url")
                 ])
             ]
         )
@@ -79,3 +82,13 @@ class SomeRadixDaftPlugin(WebvizPluginABC):
                 return "Authenticated"
 
             return "Not authenticated"
+
+        @app.callback(
+            Output("test_url", "children"),
+            [Input("url", "href")]
+        )
+        def url_info(url_href):
+            print("url_info: ", url_href)
+            print("url_info: ", app.server)
+            print("url_info: ", request)
+            return f"The URL is: {url_href}"
