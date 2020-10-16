@@ -59,6 +59,7 @@ class LoginPlugin(WebvizPluginABC):
 
             if not self._origin_url:
                 self._origin_url = url_info
+                print("url_changed: self._origin_url after setting:", self._origin_url)
 
             if not session.get("access_token"):
                 print("url_changed: No session with key 'access_token' has been set!")
