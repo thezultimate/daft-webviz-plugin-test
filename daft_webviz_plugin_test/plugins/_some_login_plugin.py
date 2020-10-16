@@ -97,6 +97,7 @@ class LoginPlugin(WebvizPluginABC):
             tokens_result = self._msal_app.acquire_token_by_authorization_code(code=code, scopes=self._scope.split(), redirect_uri=request.url_root + "auth-return")
             session["access_token"] = tokens_result.get("access_token")
             session["refresh_token"] = tokens_result.get("refresh_token")
+            print("auth_return_controller: self._origin_url:", self._origin_url)
             return redirect(self._origin_url)
 
     def _set_app_secret_key(self, app):
