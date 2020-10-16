@@ -56,7 +56,7 @@ class LoginPlugin(WebvizPluginABC):
         def url_changed(url_info):
             print("url_changed: url_info:", url_info)
             print("url_changed: self._origin_url:", self._origin_url)
-            print("url_changed: session:", session)
+            # print("url_changed: session:", session)
 
             if not self._origin_url:
                 self._origin_url = url_info
@@ -95,10 +95,10 @@ class LoginPlugin(WebvizPluginABC):
             redirect_uri = get_redirect_uri(request.url_root)
             print("auth_return_controller: redirect-uri:", redirect_uri)
             returned_query_params = request.args
-            print("auth_return_controller: returned_query_params:", returned_query_params)
+            # print("auth_return_controller: returned_query_params:", returned_query_params)
             code = returned_query_params.get("code")
             tokens_result = self._msal_app.acquire_token_by_authorization_code(code=code, scopes=self._scope.split(), redirect_uri=redirect_uri)
-            print("auth_return_controller: tokens-result:", tokens_result)
+            # print("auth_return_controller: tokens-result:", tokens_result)
             session["access_token"] = tokens_result.get("access_token")
             session["refresh_token"] = tokens_result.get("refresh_token")
             print("auth_return_controller: self._origin_url:", self._origin_url)
