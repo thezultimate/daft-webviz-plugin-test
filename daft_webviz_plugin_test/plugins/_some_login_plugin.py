@@ -56,6 +56,7 @@ class LoginPlugin(WebvizPluginABC):
         def url_changed(url_info):
             print("url_changed: url_info:", url_info)
             print("url_changed: self._origin_url:", self._origin_url)
+            print("url_changed: session:", session)
 
             if not self._origin_url:
                 self._origin_url = url_info
