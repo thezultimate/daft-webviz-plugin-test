@@ -3,8 +3,8 @@ FROM webviz/base_image:latest
 COPY --chown=appuser . dash_app
 
 RUN pip install libecl && \
--    pip install opm && \
--    pip install git+https://github.com/thezultimate/daft-webviz-plugin-test.git
+    pip install opm && \
+    pip install git+https://github.com/thezultimate/daft-webviz-plugin-test.git
 
 RUN pip list
 
