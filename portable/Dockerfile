@@ -14,7 +14,7 @@ CMD gunicorn \
     --keep-alive 120 \        
     --max-requests 40 \
     --preload \
-    --workers 10 \
+    --workers 1 \
     --worker-class gthread \
     --worker-tmp-dir /dev/shm \        
     --threads 4 \
