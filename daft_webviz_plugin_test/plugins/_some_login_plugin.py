@@ -83,11 +83,13 @@ class LoginPlugin(WebvizPluginABC):
 
         @app.server.route("/login")
         def login_controller():
+            print("login_controller: redirect-url:", request.url_root + "auth-return")
             auth_url = self._msal_app.get_authorization_request_url(scopes=self._scope.split(), redirect_uri=request.url_root + "auth-return")
             return redirect(auth_url)
 
         @app.server.route("/auth-return")
         def auth_return_controller():
+            print("auth_return_controller: redirect-url:", request.url_root + "auth-return")
             returned_query_params = request.args
             code = returned_query_params.get("code")
             tokens_result = self._msal_app.acquire_token_by_authorization_code(code=code, scopes=self._scope.split(), redirect_uri=request.url_root + "auth-return")
