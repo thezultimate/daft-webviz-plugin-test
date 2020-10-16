@@ -1,16 +1,18 @@
-title: Test of some custom containers
+title: Test login plugin
 
 pages:
 
- - title: Front page
-   content:
-    - This is a `webviz` instance created from a configuration file.   
-    - SomeCustomPlugin:
+  - title: Front page
+    content:
+      - This is a `webviz` instance created from the following configuration file.
+      - SyntaxHighlighter:
+          filename: ./basic_example.yaml
+          dark_theme: yes
+      - ---
+      - SomeCustomPlugin:
+      - ---
+      - LoginPlugin:
 
- - title: Some other page
-   content:
-    - SomeOtherCustomPlugin:
-
- - title: Azure code flow test
-   content:
-    - SomeRadixDaftPlugin:
+  - title: Some other page
+    content:
+      - SomeOtherCustomPlugin:

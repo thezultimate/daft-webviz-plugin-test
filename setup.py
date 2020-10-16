@@ -16,7 +16,7 @@ setup(
         "webviz_config_plugins": [
             "SomeCustomPlugin = daft_webviz_plugin_test.plugins:SomeCustomPlugin",
             "SomeOtherCustomPlugin = daft_webviz_plugin_test.plugins:SomeOtherCustomPlugin",
-            "SomeRadixDaftPlugin = daft_webviz_plugin_test.plugins:SomeRadixDaftPlugin",
+            "LoginPlugin = daft_webviz_plugin_test.plugins:LoginPlugin",
         ]
     },
     install_requires=[
