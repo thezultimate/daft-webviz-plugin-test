@@ -19,7 +19,7 @@ class SomeOtherCustomPlugin(WebvizPluginABC):
     def layout(self):
         return html.Div(
             [
-                html.H1("This is a static title"),
+                html.H1("Another custom plugin"),
                 html.Button(id=self.button_id, n_clicks=0, children="Submit"),
                 html.Div(id=self.div_id)
             ]
