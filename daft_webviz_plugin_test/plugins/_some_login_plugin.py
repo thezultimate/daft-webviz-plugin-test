@@ -105,7 +105,8 @@ class LoginPlugin(WebvizPluginABC):
                 print("auth_return_controller: error key exists")
                 error_description = returned_query_params.get("error_description")
                 print("auth_return_controller: error description:", error_description)
-                redirect_error_uri = get_auth_error_redirect_uri(request.url_root, error_description)
+                error_code = error_description.split(":")[0]
+                redirect_error_uri = get_auth_error_redirect_uri(request.url_root, error_code)
                 print("auth_return_controller: redirect_error_uri:", redirect_error_uri)
                 redirect(redirect_error_uri)
 
@@ -121,7 +122,7 @@ class LoginPlugin(WebvizPluginABC):
         def auth_error():
             request_query = request.args
             if "error" in request_query:
-                return "Auth error: {}".format(request_query.get("error"))
+                return "Auth error: {}. Contact the Sumo team to add you to the Azure AD group.".format(request_query.get("error"))
 
             return "Something went wrong during auth."
 
@@ -134,6 +135,6 @@ def replace_http_with_https(str):
 def get_redirect_uri(url_root):
     return replace_http_with_https(url_root + "auth-return")
 
-def get_auth_error_redirect_uri(url_root, error_description):
-    error_message = url_root + "auth-error?error={}".format(error_description)
-    return replace_http_with_https(error_message)
+def get_auth_error_redirect_uri(url_root, error_code):
+    error_url = url_root + "auth-error?error={}".format(error_code)
+    return replace_http_with_https(error_url)
