@@ -101,7 +101,8 @@ class LoginPlugin(WebvizPluginABC):
                 print("auth_return_controller: request.args: key={}, value={}".format(key, value))
             
             # TODO if error=interaction_required and error_description=AADSTS50105...
-            if returned_query_params.has_key("error"):
+            if "error" in returned_query_params:
+                print("auth_return_controller: error key exists")
                 error_description = returned_query_params.get("error_description")
                 redirect(get_auth_error_redirect_uri(request.url_root, error_description))
 
@@ -116,7 +117,7 @@ class LoginPlugin(WebvizPluginABC):
         @app.server.route("/auth-error")
         def auth_error():
             request_query = request.args
-            if request_query.has_key("error"):
+            if "error" in request_query:
                 return "Auth error: {}".format(request_query.get("error"))
 
             return "Something went wrong during auth."
