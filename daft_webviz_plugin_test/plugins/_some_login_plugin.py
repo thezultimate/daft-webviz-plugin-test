@@ -97,17 +97,13 @@ class LoginPlugin(WebvizPluginABC):
             returned_query_params = request.args
             # print("auth_return_controller: returned_query_params:", returned_query_params)
             
-            for key, value in returned_query_params.items():
-                print("auth_return_controller: request.args: key={}, value={}".format(key, value))
-            
-            # TODO if error=interaction_required and error_description=AADSTS50105...
             if "error" in returned_query_params:
-                print("auth_return_controller: error key exists")
+                # print("auth_return_controller: error key exists")
                 error_description = returned_query_params.get("error_description")
                 print("auth_return_controller: error description:", error_description)
                 error_code = error_description.split(":")[0]
                 redirect_error_uri = get_auth_error_redirect_uri(request.url_root, error_code)
-                print("auth_return_controller: redirect_error_uri:", redirect_error_uri)
+                # print("auth_return_controller: redirect_error_uri:", redirect_error_uri)
                 return redirect(redirect_error_uri)
 
             code = returned_query_params.get("code")
