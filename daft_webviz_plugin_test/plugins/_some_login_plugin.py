@@ -95,10 +95,16 @@ class LoginPlugin(WebvizPluginABC):
             redirect_uri = get_redirect_uri(request.url_root)
             print("auth_return_controller: redirect-uri:", redirect_uri)
             returned_query_params = request.args
-            print("auth_return_controller: request.args:", returned_query_params)
+            # print("auth_return_controller: returned_query_params:", returned_query_params)
+            
             for key, value in returned_query_params.items():
                 print("auth_return_controller: request.args: key={}, value={}".format(key, value))
-            # print("auth_return_controller: returned_query_params:", returned_query_params)
+            
+            # TODO if error=interaction_required and error_description=AADSTS50105...
+            if returned_query_params.has_key("error"):
+                error_description = returned_query_params.get("error_description")
+                redirect(get_auth_error_redirect_uri(request.url_root, error_description))
+
             code = returned_query_params.get("code")
             tokens_result = self._msal_app.acquire_token_by_authorization_code(code=code, scopes=self._scope.split(), redirect_uri=redirect_uri)
             # print("auth_return_controller: tokens-result:", tokens_result)
@@ -106,6 +112,14 @@ class LoginPlugin(WebvizPluginABC):
             session["refresh_token"] = tokens_result.get("refresh_token")
             print("auth_return_controller: self._origin_url:", self._origin_url)
             return redirect(self._origin_url)
+
+        @app.server.route("/auth-error")
+        def auth_error():
+            request_query = request.args
+            if request_query.has_key("error"):
+                return "Auth error: {}".format(request_query.get("error"))
+
+            return "Something went wrong during auth."
 
     def _set_app_secret_key(self, app):
         app.server.secret_key = self._session_secret_key
@@ -115,3 +129,7 @@ def replace_http_with_https(str):
 
 def get_redirect_uri(url_root):
     return replace_http_with_https(url_root + "auth-return")
+
+def get_auth_error_redirect_uri(url_root, error_description):
+    error_message = url_root + "auth-error?error={}".format(error_description)
+    return replace_http_with_https(error_message)
