@@ -108,7 +108,7 @@ class LoginPlugin(WebvizPluginABC):
                 error_code = error_description.split(":")[0]
                 redirect_error_uri = get_auth_error_redirect_uri(request.url_root, error_code)
                 print("auth_return_controller: redirect_error_uri:", redirect_error_uri)
-                redirect(redirect_error_uri)
+                return redirect(redirect_error_uri)
 
             code = returned_query_params.get("code")
             tokens_result = self._msal_app.acquire_token_by_authorization_code(code=code, scopes=self._scope.split(), redirect_uri=redirect_uri)
