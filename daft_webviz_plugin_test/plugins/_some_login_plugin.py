@@ -104,7 +104,10 @@ class LoginPlugin(WebvizPluginABC):
             if "error" in returned_query_params:
                 print("auth_return_controller: error key exists")
                 error_description = returned_query_params.get("error_description")
-                redirect(get_auth_error_redirect_uri(request.url_root, error_description))
+                print("auth_return_controller: error description:", error_description)
+                redirect_error_uri = get_auth_error_redirect_uri(request.url_root, error_description)
+                print("auth_return_controller: redirect_error_uri:", redirect_error_uri)
+                redirect(redirect_error_uri)
 
             code = returned_query_params.get("code")
             tokens_result = self._msal_app.acquire_token_by_authorization_code(code=code, scopes=self._scope.split(), redirect_uri=redirect_uri)
